@@ -1538,11 +1538,21 @@ cron.schedule('* * * * *', async () => {
 
 
 
-
+router.get('/testing', async (req, res) => {
+  try {
+    const conn = await getConnection();
+    const [rows] = await conn.query('SELECT 1'); // ✅ use conn
+    res.json({ message: 'Database connected ✅', rows });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 
 
 // USER MANAGEMENT API
+
+
 
 
 // Login with Barcode Scanner ==================
