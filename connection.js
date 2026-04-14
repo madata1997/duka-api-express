@@ -1,22 +1,30 @@
 const mysql = require('mysql2/promise');
 require('dotenv').config();
+const date = require('date-and-time');
+
+const now = new Date();
 
 let connection;
 
-const getConnection = async () => {
-  if (!connection) {
+(async () => {
+  try {
     connection = await mysql.createConnection({
+      port: process.env.DB_PORT,
       host: process.env.DB_HOST,
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      port: process.env.DB_PORT
+      waitForConnections: true,
+      connectionLimit: 10,
+      queueLimit: 0
     });
 
-    console.log('✅ DB Connected');
+    console.log('Connected to the database at', date.format(now, 'YYYY-MM-DD HH:mm:ss'));
+  } catch (err) {
+    console.error('Failed to connect to the database:', err.message);
   }
+})();
 
-  return connection;
+module.exports = {
+  getConnection: async () => connection
 };
-
-module.exports = { getConnection };
