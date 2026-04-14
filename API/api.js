@@ -4020,7 +4020,7 @@ router.get('/get/menuList/view/public', async (req, res) => {
 
   } catch (err) {
     console.error('Error fetching menu list:', err);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: 'Internal server errorsss' });
   } 
 });
 
