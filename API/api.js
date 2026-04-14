@@ -4018,10 +4018,11 @@ router.get('/get/menuList/view/public', async (req, res) => {
       data: results
     });
 
-  } catch (err) {
-    console.error('Error fetching menu list:', err);
-    return res.status(500).json({ error: 'Internal server errorsss' });
   } 
+    catch (err) {
+  console.error('Error fetching menu list:', err);
+  return res.status(500).json({ error: err.message }); 
+}
 });
 
 
