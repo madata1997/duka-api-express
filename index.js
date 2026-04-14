@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('PDF'));
 
-// ✅ Add this
+//  Add this
 app.get('/', (req, res) => {
   res.send('API is running 🚀');
 });
